@@ -4,7 +4,7 @@
 
 ### Keys
 
-Arrow keys: focus illustration.
+Arrow keys: focus illustration <br/>
 s: Open/Close user box <br/>
 z: next page on artwork that have above 2 illust <br/>
 x: previous page on artwork that have above 2 illust <br/>
