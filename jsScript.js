@@ -299,43 +299,45 @@ document.onmousemove = function (e) {
 document.onkeydown = function (e) {
     if (e.key.toLowerCase() == "e" || e.key.toLowerCase() == "d") {
         let isBookmark = false;
-        const paths = mouseMoveEvent.path;
-        let illus = null;
-        for (let i = 0; i < paths.length; ++i) {
-            if (paths[i].tagName == "UL") {
-                illus = paths[i - 1];
-                break;
-            }
-        }
-        if (illus) {
-            const btn = illus.querySelector("div [type=illust] button");
-            if (btn) {
-                btn.click();
-                isBookmark = true;
-            }
-        } else {
-            const imgs = document.querySelectorAll(
-                "div[type=illust] > div img[src]"
-            );
-            checkAndSetPreviewIdImg(imgs);
-            const length = imgs.length;
-            for (let i = 0; i < length; ++i) {
-                if (!imgs[i]?.src) continue;
-                if (imgs[i].src.indexOf(previewIdImg) != -1 && i < length) {
-                    try {
-                        isBookmark = true;
-                        let elementBtn =
-                            imgs[
-                                i
-                            ].parentElement.parentElement.nextElementSibling.querySelector(
-                                "button"
-                            );
-                        elementBtn.click();
-                    } catch {
-                        isBookmark = false;
-                    }
+        if (mouseMoveEvent) {
+            const paths = mouseMoveEvent.path;
+            let illus = null;
+            for (let i = 0; i < paths.length; ++i) {
+                if (paths[i].tagName == "UL") {
+                    illus = paths[i - 1];
                     break;
                 }
+            }
+            if (illus) {
+                const btn = illus.querySelector("div [type=illust] button");
+                if (btn) {
+                    btn.click();
+                    isBookmark = true;
+                }
+                return;
+            }
+        }
+        const imgs = document.querySelectorAll(
+            "div[type=illust] > div img[src]"
+        );
+        checkAndSetPreviewIdImg(imgs);
+        const length = imgs.length;
+        for (let i = 0; i < length; ++i) {
+            if (!imgs[i]?.src) continue;
+            if (imgs[i].src.indexOf(previewIdImg) != -1 && i < length) {
+                try {
+                    isBookmark = true;
+                    let elementBtn =
+                        imgs[
+                            i
+                        ].parentElement.parentElement.nextElementSibling.querySelector(
+                            "button"
+                        );
+                    elementBtn.click();
+                } catch {
+                    isBookmark = false;
+                }
+                break;
             }
         }
         if (!isBookmark) {
