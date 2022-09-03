@@ -226,6 +226,7 @@ previewImgElement = null;
 isNewPreviewBox = true;
 isUserBoxShow = false;
 previousImgBeforeIntoUserBox = null;
+currentLocation = window.location.href;
 document.onmousemove = function (e) {
     const paths = e.path;
     let isInPreviewBox = false;
@@ -297,6 +298,11 @@ document.onmousemove = function (e) {
     }
 };
 document.onkeydown = function (e) {
+    if (currentLocation != window.location.href) {
+        currentLocation = window.location.href;
+        previewIdImg = null;
+        previewImgElement = null;
+    }
     if (e.key.toLowerCase() == "e" || e.key.toLowerCase() == "d") {
         let isBookmark = false;
         if (mouseMoveEvent) {
@@ -750,6 +756,7 @@ async function focusToFirstImgInUserBox() {
 // function (value){
 //     previewIdImg = value;
 //     isNewPreviewBox = true;
+// }
 // }
 // }
 // }
