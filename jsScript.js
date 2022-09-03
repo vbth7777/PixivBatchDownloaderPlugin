@@ -729,13 +729,12 @@ async function focusToFirstImgInUserBox() {
         focusImg.nextElementSibling.nextElementSibling.firstChild
     );
     while (
-        document.querySelector(bodyDivLast).querySelectorAll(" img[src][class]")
-            ?.length == 0
+        document.querySelectorAll(bodyDivLast + " img[src][class]")?.length == 0
     ) {
         await sleep(500);
         const div = document
             .querySelector(bodyDivLast)
-            .querySelector("div[open] > div");
+            ?.querySelector("div[open] > div");
         if (div) {
             div.scrollTop = div.scrollHeight;
         }
