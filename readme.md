@@ -12,3 +12,5 @@
 - z: next page on artwork that have above 2 illust <br/>
 - x: previous page on artwork that have above 2 illust <br/>
 - e: add bookmark but don't download <br/>
+
+> ### I recommend use tampermonkey or something like that to auto reloading script when you enter pixiv
