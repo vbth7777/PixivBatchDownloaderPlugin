@@ -2,6 +2,9 @@
 
 > ## <center>Source https://github.com/xuejianxianzun/PixivBatchDownloader</center>
 
+### Features:
+- Fixed some problem on source extension
+
 ### Keys
 
 Arrow keys: focus illustration <br/>
