@@ -226,7 +226,6 @@ previewImgElement = null;
 isNewPreviewBox = true;
 isUserBoxShow = false;
 previousImgBeforeIntoUserBox = null;
-currentLocation = window.location.href;
 document.onmousemove = function (e) {
     const paths = e.path;
     let isInPreviewBox = false;
@@ -298,52 +297,45 @@ document.onmousemove = function (e) {
     }
 };
 document.onkeydown = function (e) {
-    if (currentLocation != window.location.href) {
-        currentLocation = window.location.href;
-        previewIdImg = null;
-        previewImgElement = null;
-    }
     if (e.key.toLowerCase() == "e" || e.key.toLowerCase() == "d") {
         let isBookmark = false;
-        if (mouseMoveEvent) {
-            const paths = mouseMoveEvent.path;
-            let illus = null;
-            for (let i = 0; i < paths.length; ++i) {
-                if (paths[i].tagName == "UL") {
-                    illus = paths[i - 1];
-                    break;
-                }
-            }
-            if (illus) {
-                const btn = illus.querySelector("div [type=illust] button");
-                if (btn) {
-                    btn.click();
-                    isBookmark = true;
-                }
-                return;
+        const paths = mouseMoveEvent.path;
+        let illus = null;
+        for (let i = 0; i < paths.length; ++i) {
+            if (paths[i].tagName == "UL") {
+                illus = paths[i - 1];
+                break;
             }
         }
-        const imgs = document.querySelectorAll(
-            "div[type=illust] > div img[src]"
-        );
-        checkAndSetPreviewIdImg(imgs);
-        const length = imgs.length;
-        for (let i = 0; i < length; ++i) {
-            if (!imgs[i]?.src) continue;
-            if (imgs[i].src.indexOf(previewIdImg) != -1 && i < length) {
-                try {
-                    isBookmark = true;
-                    let elementBtn =
-                        imgs[
-                            i
-                        ].parentElement.parentElement.nextElementSibling.querySelector(
-                            "button"
-                        );
-                    elementBtn.click();
-                } catch {
-                    isBookmark = false;
+        if (illus) {
+            const btn = illus.querySelector("div [type=illust] button");
+            if (btn) {
+                btn.click();
+                isBookmark = true;
+            }
+        } else {
+            const imgs = document.querySelectorAll(
+                "div[type=illust] > div img[src]"
+            );
+            checkAndSetPreviewIdImg(imgs);
+            const length = imgs.length;
+            for (let i = 0; i < length; ++i) {
+                if (!imgs[i]?.src) continue;
+                if (imgs[i].src.indexOf(previewIdImg) != -1 && i < length) {
+                    try {
+                        isBookmark = true;
+                        let elementBtn =
+                            imgs[
+                                i
+                            ].parentElement.parentElement.nextElementSibling.querySelector(
+                                "button"
+                            );
+                        elementBtn.click();
+                    } catch {
+                        isBookmark = false;
+                    }
+                    break;
                 }
-                break;
             }
         }
         if (!isBookmark) {
@@ -737,12 +729,13 @@ async function focusToFirstImgInUserBox() {
         focusImg.nextElementSibling.nextElementSibling.firstChild
     );
     while (
-        document.querySelectorAll(bodyDivLast + " img[src][class]")?.length == 0
+        document.querySelector(bodyDivLast).querySelectorAll(" img[src][class]")
+            ?.length == 0
     ) {
         await sleep(500);
         const div = document
             .querySelector(bodyDivLast)
-            ?.querySelector("div[open] > div");
+            .querySelector("div[open] > div");
         if (div) {
             div.scrollTop = div.scrollHeight;
         }
@@ -756,7 +749,4 @@ async function focusToFirstImgInUserBox() {
 // function (value){
 //     previewIdImg = value;
 //     isNewPreviewBox = true;
-// }
-// }
-// }
 // }
