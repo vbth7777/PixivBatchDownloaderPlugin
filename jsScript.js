@@ -143,7 +143,7 @@ var Token = /** @class */ (function () {
         this.tokenStore = "xzToken";
         this.timeStore = "xzTokenTime";
         this.updateURL = "https://www.pixiv.net/artworks/62751951";
-        this.interval = 300000; // 两次更新之间的最小时间间隔。目前设置为 5 分钟
+        this.interval = 300000; 
         this.token = this.getToken();
         this.updateToken();
         this.bindEvents();
@@ -169,7 +169,7 @@ var Token = /** @class */ (function () {
                 ) {
                     return [2 /*return*/];
                 }
-                // 从网页源码里获取用户 token 并储存
+
                 return [
                     2 /*return*/,
                     fetch(this.updateURL)
@@ -178,9 +178,7 @@ var Token = /** @class */ (function () {
                         })
                         .then(function (data) {
                             var result = data.match(/token":"(\w+)"/);
-                            // 不论用户是否登录，都有 token，所以不能根据 token 来判断用户是否登录
-                            // 如果存在下面的字符串，则说明用户未登录：
-                            // "userData":null
+                            
                             if (result) {
                                 _this.token = result[1];
                                 localStorage.setItem(
