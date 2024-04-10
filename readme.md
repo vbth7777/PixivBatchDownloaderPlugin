@@ -1,16 +1,18 @@
-# <center>PixivBatchDownloader Plugin</center>
+# PixivBatchDownloader Plugin
 
-> ## <center>Source https://github.com/xuejianxianzun/PixivBatchDownloader</center>
+## Source 
+https://github.com/xuejianxianzun/PixivBatchDownloader
 
-### Features:
-- Fixed some problem on source extension
-- Add some new useful keys
+### Features
+- Fixed some problems in the original extension
+- Added some new useful keyboard shortcuts
 
-### Keys
-- Arrow keys: focus illustration <br/>
-- s: Open/Close user box <br/>
-- z: next page on artwork that have over 2 illust <br/>
-- x: previous page on artwork that have over 2 illust <br/>
-- e: add bookmark but don't download <br/>
+### Keyboard Shortcuts
+- Arrow keys: Focus on the illustration
+- S: Open/Close the user box  
+- Z: Next page for artworks that have more than 2 illustrations
+- X: Previous page for artworks that have more than 2 illustrations
+- E: Add bookmark without downloading
 
-> ### I recommend use tampermonkey or something like that to auto reloading script when you enter pixiv
+### Notes
+I recommend using Tampermonkey or a similar extension to automatically reload the script when viewing Pixiv. This will apply any changes made to the script immediately without needing to manually reload the browser.
